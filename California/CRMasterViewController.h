@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class CLDetailViewController;
-
-@interface CLMasterViewController : UITableViewController
-
-@property (strong, nonatomic) CLDetailViewController *detailViewController;
+@interface CRMasterViewController : UITableViewController <UISplitViewControllerDelegate>
 
 @end

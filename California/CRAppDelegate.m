@@ -6,18 +6,22 @@
 //  Copyright (c) 2014 cogniance. All rights reserved.
 //
 
-#import "CLAppDelegate.h"
+#import "CRAppDelegate.h"
 
-@implementation CLAppDelegate
+@implementation CRAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-	    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-	    UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-	    splitViewController.delegate = (id)navigationController.topViewController;
-	}
+//	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+//	{
+//		UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+//		
+//		UINavigationController *detailViewController = [[UIStoryboard storyboardWithName:@"Main_iPad" bundle:nil] instantiateViewControllerWithIdentifier:@"CLTableViewController"];
+//		
+//		splitViewController.viewControllers = @[[splitViewController.viewControllers firstObject], detailViewController];
+//		splitViewController.delegate = (id)detailViewController.topViewController;
+//	}
     return YES;
 }
 							
