@@ -70,13 +70,13 @@
 		7824E39818B765DA00CA679E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7824E39A18B765DA00CA679E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7824E39C18B765DA00CA679E /* California-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "California-Prefix.pch"; sourceTree = "<group>"; };
-		7824E39D18B765DA00CA679E /* CRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRAppDelegate.h; sourceTree = "<group>"; };
-		7824E39E18B765DA00CA679E /* CRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRAppDelegate.m; sourceTree = "<group>"; };
+		7824E39D18B765DA00CA679E /* CRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CRAppDelegate.h; path = Sources/CRAppDelegate.h; sourceTree = "<group>"; };
+		7824E39E18B765DA00CA679E /* CRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CRAppDelegate.m; path = Sources/CRAppDelegate.m; sourceTree = "<group>"; };
 		7824E3A118B765DA00CA679E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		7824E3A418B765DA00CA679E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		7824E3A618B765DA00CA679E /* CRMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRMasterViewController.h; sourceTree = "<group>"; };
 		7824E3A718B765DA00CA679E /* CRMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRMasterViewController.m; sourceTree = "<group>"; };
-		7824E3AC18B765DA00CA679E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7824E3AC18B765DA00CA679E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Resources/Images.xcassets; sourceTree = "<group>"; };
 		7824E3B218B765DA00CA679E /* CaliforniaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CaliforniaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7824E3B318B765DA00CA679E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		7824E3BB18B765DA00CA679E /* CaliforniaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CaliforniaTests-Info.plist"; sourceTree = "<group>"; };
@@ -253,7 +253,7 @@
 				7825A95A18B88E2C0078E937 /* Localizable.strings */,
 				7825A96718B8DE480078E937 /* urls.plist */,
 			);
-			name = Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		7825A96118B892110078E937 /* Interfaces */ = {
@@ -280,6 +280,7 @@
 				7825A9A818BA16600078E937 /* CRSelectLayoutTableViewController.m */,
 			);
 			name = Controllers;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		7825A96318B8DD090078E937 /* View */ = {
@@ -293,6 +294,7 @@
 				7825A9A518B9FD640078E937 /* CRCollectionViewCell.m */,
 			);
 			name = View;
+			path = Sources;
 			sourceTree = "<group>";
 		};
 		7825A96918B8E2F20078E937 /* AFNetworking */ = {
@@ -318,7 +320,8 @@
 				7825A97B18B8E2F20078E937 /* AFURLSessionManager.h */,
 				7825A97C18B8E2F20078E937 /* AFURLSessionManager.m */,
 			);
-			path = AFNetworking;
+			name = AFNetworking;
+			path = Sources/AFNetworking;
 			sourceTree = "<group>";
 		};
 		7825A97D18B8E2F20078E937 /* UIKit+AFNetworking */ = {
@@ -340,7 +343,8 @@
 				7825A98B18B8E2F20078E937 /* UIWebView+AFNetworking.h */,
 				7825A98C18B8E2F20078E937 /* UIWebView+AFNetworking.m */,
 			);
-			path = "UIKit+AFNetworking";
+			name = "UIKit+AFNetworking";
+			path = "Sources/UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -499,6 +503,7 @@
 				7824E39818B765DA00CA679E /* en */,
 			);
 			name = InfoPlist.strings;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		7824E3A018B765DA00CA679E /* Main_iPhone.storyboard */ = {

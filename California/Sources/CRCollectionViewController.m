@@ -83,6 +83,7 @@
 		CRSelectLayoutTableViewController *destinationViewController = [segue destinationViewController];
 		destinationViewController.delegate = self;
 		self.selectLayoutPopover = [(UIStoryboardPopoverSegue*)segue popoverController];
+        self.selectLayoutPopover.delegate = self;
 	}
 }
 
@@ -92,14 +93,14 @@
 {
 	[self setHorizontalLayoutAnimated:YES];
 	[self.selectLayoutPopover dismissPopoverAnimated:YES];
-	[self.selectLayoutButton setEnabled:YES];
+    [self.selectLayoutButton setEnabled:YES];
 }
 
 - (void)verticalLayoutDidSelect
 {
 	[self setVerticalLayoutAnimated:YES];
 	[self.selectLayoutPopover dismissPopoverAnimated:YES];
-	[self.selectLayoutButton setEnabled:YES];
+    [self.selectLayoutButton setEnabled:YES];
 }
 
 #pragma mark - SplitView Delegate
@@ -164,6 +165,13 @@
 	{
 		[self setHorizontalLayoutAnimated:NO];
 	}
+}
+
+#pragma mark - Popover Delegate
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    [self.selectLayoutButton setEnabled:YES];
 }
 
 @end

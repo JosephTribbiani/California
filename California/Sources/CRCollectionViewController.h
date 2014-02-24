@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "CRSelectLayoutTableViewController.h"
 
-@interface CRCollectionViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegate, CRSelectLayoutTableViewControllerDelegate>
+@interface CRCollectionViewController : UICollectionViewController <UICollectionViewDataSource, UICollectionViewDelegate, CRSelectLayoutTableViewControllerDelegate, UIPopoverControllerDelegate>
 
 @end

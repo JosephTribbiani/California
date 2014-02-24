@@ -43,8 +43,8 @@
 - (NSDictionary *)tableViewMap
 {
 	return @{@(0): @"Table",
-				@(1): @"Collection",
-				@(2): @"Map"};
+        @(1): @"Collection",
+        @(2): @"Map"};
 }
 
 - (UIViewController *)detailViewConroller
@@ -85,7 +85,8 @@
 	UIBarButtonItem *navigationButton = [[self.detailViewConroller navigationItem] leftBarButtonItem];
 	
 	[[self.detailViewConroller navigationItem] setLeftBarButtonItem:nil];
-	[self performSegueWithIdentifier:[[self tableViewMap] objectForKey:@(indexPath.row)] sender:self];
+    id key = @(indexPath.row);
+	[self performSegueWithIdentifier:[[self tableViewMap] objectForKey:key] sender:self];
 	[[self.detailViewConroller navigationItem] setLeftBarButtonItem:navigationButton];
 }
 
