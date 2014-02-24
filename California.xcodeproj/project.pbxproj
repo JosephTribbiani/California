@@ -134,6 +134,7 @@
 		7825A9A518B9FD640078E937 /* CRCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRCollectionViewCell.m; sourceTree = "<group>"; };
 		7825A9A718BA16600078E937 /* CRSelectLayoutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSelectLayoutTableViewController.h; sourceTree = "<group>"; };
 		7825A9A818BA16600078E937 /* CRSelectLayoutTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSelectLayoutTableViewController.m; sourceTree = "<group>"; };
+		D82A00D018BB4E5A00E88ECA /* CRUpdateUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRUpdateUI.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +279,7 @@
 				7825A95C18B88E770078E937 /* CRMapViewController.m */,
 				7825A9A718BA16600078E937 /* CRSelectLayoutTableViewController.h */,
 				7825A9A818BA16600078E937 /* CRSelectLayoutTableViewController.m */,
+				D82A00D018BB4E5A00E88ECA /* CRUpdateUI.h */,
 			);
 			name = Controllers;
 			path = Sources;

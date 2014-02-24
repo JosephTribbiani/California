@@ -7,9 +7,13 @@
 //
 
 #import "CRMasterViewController.h"
+#import "CRUpdateUI.h"
 
 @interface CRMasterViewController()
+
 @property (nonatomic, retain) UIViewController *detailViewConroller;
+@property (nonatomic, retain) UIPopoverController *popOverController;
+
 @end
 
 @implementation CRMasterViewController
@@ -43,8 +47,8 @@
 - (NSDictionary *)tableViewMap
 {
 	return @{@(0): @"Table",
-        @(1): @"Collection",
-        @(2): @"Map"};
+             @(1): @"Collection",
+             @(2): @"Map"};
 }
 
 - (UIViewController *)detailViewConroller
@@ -85,8 +89,9 @@
 	UIBarButtonItem *navigationButton = [[self.detailViewConroller navigationItem] leftBarButtonItem];
 	
 	[[self.detailViewConroller navigationItem] setLeftBarButtonItem:nil];
-    id key = @(indexPath.row);
-	[self performSegueWithIdentifier:[[self tableViewMap] objectForKey:key] sender:self];
+    [self.popOverController dismissPopoverAnimated:YES];
+    self.popOverController = nil;
+	[self performSegueWithIdentifier:[[self tableViewMap] objectForKey:@(indexPath.row)] sender:self];
 	[[self.detailViewConroller navigationItem] setLeftBarButtonItem:navigationButton];
 }
 
@@ -96,11 +101,26 @@
 {
 	barButtonItem.title = NSLocalizedString(@"Master", @"Master");
 	[[self.detailViewConroller navigationItem] setLeftBarButtonItem:barButtonItem animated:YES];
+    
+    if ([self.detailViewConroller conformsToProtocol:@protocol(CRUpdateUI)])
+    {
+        [(id<CRUpdateUI>)(self.detailViewConroller) updateUI];
+    }
 }
 
 - (void)splitViewController:(UISplitViewController *)splitController willShowViewController:(UIViewController *)viewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
 	[[self.detailViewConroller navigationItem] setLeftBarButtonItem:nil animated:YES];
+    
+    if ([self.detailViewConroller conformsToProtocol:@protocol(CRUpdateUI)])
+    {
+        [(id<CRUpdateUI>)(self.detailViewConroller) updateUI];
+    }
+}
+
+- (void)splitViewController:(UISplitViewController *)svc popoverController:(UIPopoverController *)pc willPresentViewController:(UIViewController *)aViewController
+{
+    self.popOverController = pc;
 }
 
 @end

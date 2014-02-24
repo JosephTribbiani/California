@@ -10,7 +10,7 @@
 #import "CRCollectionViewCell.h"
 #import "UIImageView+AFNetworking.h"
 
-@interface CRCollectionViewController() <UISplitViewControllerDelegate>
+@interface CRCollectionViewController()
 {
 	NSArray *_images;
 }
@@ -28,7 +28,6 @@
 {
 	[super viewDidLoad];
 	[self setHorizontalLayoutAnimated:NO];
-	self.splitViewController.delegate = self;
 	// Do any additional setup after loading the view.
 }
 
@@ -103,18 +102,6 @@
     [self.selectLayoutButton setEnabled:YES];
 }
 
-#pragma mark - SplitView Delegate
-
-- (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
-{
-	[self updateScrollLayout];
-}
-
-- (void)splitViewController:(UISplitViewController *)splitController willShowViewController:(UIViewController *)viewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-{
-	[self updateScrollLayout];
-}
-
 #pragma mark -
 
 - (void)setHorizontalLayoutAnimated:(BOOL)animated
@@ -172,6 +159,13 @@
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
     [self.selectLayoutButton setEnabled:YES];
+}
+
+#pragma mark - CRIUpdateUI Protocol
+
+- (void)updateUI
+{
+    [self updateScrollLayout];
 }
 
 @end
