@@ -13,12 +13,12 @@
 
 @property (nonatomic, assign, readonly) CLLocationDegrees latitude;
 @property (nonatomic, assign, readonly) CLLocationDegrees longitude;
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *subtitle;
+@property (nonatomic, copy) NSString* title;
+@property (nonatomic, copy) NSString* subtitle;
 
 - (id)initWithLatitude:(CLLocationDegrees)latitude
 				 longitude:(CLLocationDegrees)longitude
-					  title:(NSString *)title
-				  subtitle:(NSString *)subtitle;
+					  title:(NSString*)title
+				  subtitle:(NSString*)subtitle;
 
 @end

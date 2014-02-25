@@ -49,6 +49,10 @@
 		7825A9A318B9ED660078E937 /* CRAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7825A9A218B9ED660078E937 /* CRAnnotation.m */; };
 		7825A9A618B9FD640078E937 /* CRCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7825A9A518B9FD640078E937 /* CRCollectionViewCell.m */; };
 		7825A9A918BA16600078E937 /* CRSelectLayoutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7825A9A818BA16600078E937 /* CRSelectLayoutTableViewController.m */; };
+		D816783018BC9DA3008D956A /* CRPolyLine.m in Sources */ = {isa = PBXBuildFile; fileRef = D816782F18BC9DA3008D956A /* CRPolyLine.m */; };
+		D82A00D418BB738800E88ECA /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = D82A00D318BB738800E88ECA /* pin.png */; };
+		D82A00D818BB748000E88ECA /* pin2.png in Resources */ = {isa = PBXBuildFile; fileRef = D82A00D718BB748000E88ECA /* pin2.png */; };
+		D82A00DA18BB997700E88ECA /* Cogniance.gpx in Resources */ = {isa = PBXBuildFile; fileRef = D82A00D918BB997700E88ECA /* Cogniance.gpx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,7 +138,12 @@
 		7825A9A518B9FD640078E937 /* CRCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRCollectionViewCell.m; sourceTree = "<group>"; };
 		7825A9A718BA16600078E937 /* CRSelectLayoutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRSelectLayoutTableViewController.h; sourceTree = "<group>"; };
 		7825A9A818BA16600078E937 /* CRSelectLayoutTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRSelectLayoutTableViewController.m; sourceTree = "<group>"; };
+		D816782E18BC9DA3008D956A /* CRPolyLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRPolyLine.h; sourceTree = "<group>"; };
+		D816782F18BC9DA3008D956A /* CRPolyLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRPolyLine.m; sourceTree = "<group>"; };
 		D82A00D018BB4E5A00E88ECA /* CRUpdateUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRUpdateUI.h; sourceTree = "<group>"; };
+		D82A00D318BB738800E88ECA /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
+		D82A00D718BB748000E88ECA /* pin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin2.png; sourceTree = "<group>"; };
+		D82A00D918BB997700E88ECA /* Cogniance.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Cogniance.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,7 +258,10 @@
 		7825A96018B891E50078E937 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D82A00D718BB748000E88ECA /* pin2.png */,
+				D82A00D318BB738800E88ECA /* pin.png */,
 				7825A99D18B8E3770078E937 /* Placeholder.jpg */,
+				D82A00D918BB997700E88ECA /* Cogniance.gpx */,
 				7825A96118B892110078E937 /* Interfaces */,
 				7825A95A18B88E2C0078E937 /* Localizable.strings */,
 				7825A96718B8DE480078E937 /* urls.plist */,
@@ -275,11 +287,11 @@
 				7824E3CA18B76E0100CA679E /* CRCollectionViewController.m */,
 				7824E3CC18B76E2000CA679E /* CRTableViewController.h */,
 				7824E3CD18B76E2000CA679E /* CRTableViewController.m */,
-				7825A95B18B88E770078E937 /* CRMapViewController.h */,
-				7825A95C18B88E770078E937 /* CRMapViewController.m */,
 				7825A9A718BA16600078E937 /* CRSelectLayoutTableViewController.h */,
 				7825A9A818BA16600078E937 /* CRSelectLayoutTableViewController.m */,
 				D82A00D018BB4E5A00E88ECA /* CRUpdateUI.h */,
+				7825A95B18B88E770078E937 /* CRMapViewController.h */,
+				7825A95C18B88E770078E937 /* CRMapViewController.m */,
 			);
 			name = Controllers;
 			path = Sources;
@@ -294,6 +306,8 @@
 				7825A9A218B9ED660078E937 /* CRAnnotation.m */,
 				7825A9A418B9FD640078E937 /* CRCollectionViewCell.h */,
 				7825A9A518B9FD640078E937 /* CRCollectionViewCell.m */,
+				D816782E18BC9DA3008D956A /* CRPolyLine.h */,
+				D816782F18BC9DA3008D956A /* CRPolyLine.m */,
 			);
 			name = View;
 			path = Sources;
@@ -427,6 +441,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7825A96818B8DE480078E937 /* urls.plist in Resources */,
+				D82A00D418BB738800E88ECA /* pin.png in Resources */,
+				D82A00D818BB748000E88ECA /* pin2.png in Resources */,
+				D82A00DA18BB997700E88ECA /* Cogniance.gpx in Resources */,
 				7824E3A518B765DA00CA679E /* Main_iPad.storyboard in Resources */,
 				7824E3AD18B765DA00CA679E /* Images.xcassets in Resources */,
 				7824E3A218B765DA00CA679E /* Main_iPhone.storyboard in Resources */,
@@ -473,6 +490,7 @@
 				7825A95D18B88E770078E937 /* CRMapViewController.m in Sources */,
 				7825A98F18B8E2F20078E937 /* AFHTTPSessionManager.m in Sources */,
 				7825A9A318B9ED660078E937 /* CRAnnotation.m in Sources */,
+				D816783018BC9DA3008D956A /* CRPolyLine.m in Sources */,
 				7824E39F18B765DA00CA679E /* CRAppDelegate.m in Sources */,
 				7825A99018B8E2F20078E937 /* AFNetworkReachabilityManager.m in Sources */,
 				7825A99A18B8E2F20078E937 /* UIImageView+AFNetworking.m in Sources */,
@@ -625,6 +643,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "California/California-Prefix.pch";
 				INFOPLIST_FILE = "California/California-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -638,6 +657,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "California/California-Prefix.pch";
 				INFOPLIST_FILE = "California/California-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

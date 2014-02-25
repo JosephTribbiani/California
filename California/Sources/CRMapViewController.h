@@ -11,6 +11,6 @@
 
 @interface CRMapViewController : UIViewController <MKMapViewDelegate>
 
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet MKMapView* mapView;
 
 @end

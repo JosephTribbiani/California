@@ -11,8 +11,8 @@
 
 @interface CRMasterViewController()
 
-@property (nonatomic, retain) UIViewController *detailViewConroller;
-@property (nonatomic, retain) UIPopoverController *popOverController;
+@property (nonatomic, strong) UIViewController* detailViewConroller;
+@property (nonatomic, strong) UIPopoverController* popOverController;
 
 @end
 
@@ -25,7 +25,10 @@
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
 	{
 	    self.clearsSelectionOnViewWillAppear = NO;
-	    self.preferredContentSize = CGSizeMake(320.0, 600.0);
+        if (IS_IOS7_AND_UP)
+        {
+            self.preferredContentSize = CGSizeMake(320.0, 600.0);
+        }   
 	}
     [super awakeFromNib];
 }
@@ -33,7 +36,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 0)];
+    footerView.backgroundColor = [UIColor clearColor];
+    [self.tableView setTableFooterView:footerView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,14 +50,14 @@
 
 #pragma mark -
 
-- (NSDictionary *)tableViewMap
+- (NSDictionary*)tableViewMap
 {
 	return @{@(0): @"Table",
              @(1): @"Collection",
              @(2): @"Map"};
 }
 
-- (UIViewController *)detailViewConroller
+- (UIViewController*)detailViewConroller
 {
 	return [[[self.splitViewController viewControllers] lastObject] topViewController];
 }
@@ -59,34 +65,34 @@
 
 #pragma mark - TableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
 {
 	return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
 	return [[self tableViewMap] count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MasteViewControlerCell" forIndexPath:indexPath];
+	UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"MasteViewControlerCell" forIndexPath:indexPath];
 	cell.textLabel.text = NSLocalizedString([[self tableViewMap] objectForKey:@(indexPath.row)], @"");
 	return cell;
 }
 
 #pragma mark - TableViewDelegate
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+- (BOOL)tableView:(UITableView*)tableView canEditRowAtIndexPath:(NSIndexPath*)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return NO;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
-	UIBarButtonItem *navigationButton = [[self.detailViewConroller navigationItem] leftBarButtonItem];
+	UIBarButtonItem* navigationButton = [[self.detailViewConroller navigationItem] leftBarButtonItem];
 	
 	[[self.detailViewConroller navigationItem] setLeftBarButtonItem:nil];
     [self.popOverController dismissPopoverAnimated:YES];
@@ -97,7 +103,7 @@
 
 #pragma mark - SplitView Delegate
 
-- (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
+- (void)splitViewController:(UISplitViewController*)splitController willHideViewController:(UIViewController*)viewController withBarButtonItem:(UIBarButtonItem*)barButtonItem forPopoverController:(UIPopoverController*)popoverController
 {
 	barButtonItem.title = NSLocalizedString(@"Master", @"Master");
 	[[self.detailViewConroller navigationItem] setLeftBarButtonItem:barButtonItem animated:YES];
@@ -108,7 +114,7 @@
     }
 }
 
-- (void)splitViewController:(UISplitViewController *)splitController willShowViewController:(UIViewController *)viewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+- (void)splitViewController:(UISplitViewController*)splitController willShowViewController:(UIViewController*)viewController invalidatingBarButtonItem:(UIBarButtonItem*)barButtonItem
 {
 	[[self.detailViewConroller navigationItem] setLeftBarButtonItem:nil animated:YES];
     
@@ -118,7 +124,7 @@
     }
 }
 
-- (void)splitViewController:(UISplitViewController *)svc popoverController:(UIPopoverController *)pc willPresentViewController:(UIViewController *)aViewController
+- (void)splitViewController:(UISplitViewController*)svc popoverController:(UIPopoverController*)pc willPresentViewController:(UIViewController*)aViewController
 {
     self.popOverController = pc;
 }

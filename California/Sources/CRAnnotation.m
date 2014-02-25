@@ -12,8 +12,8 @@
 
 - (id)initWithLatitude:(CLLocationDegrees)latitude
 				 longitude:(CLLocationDegrees)longitude
-					  title:(NSString *)title
-				  subtitle:(NSString *)subtitle
+					  title:(NSString*)title
+				  subtitle:(NSString*)subtitle
 {
 	self = [super init];
 	if (self)

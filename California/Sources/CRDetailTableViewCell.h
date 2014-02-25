@@ -10,9 +10,9 @@
 
 @interface CRDetailTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIView *imageVIew;
-@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIView* imageVIew;
+@property (weak, nonatomic) IBOutlet UITextView* textView;
 
-+ (CGFloat)rowHeightForText:(NSString *)text;
++ (CGFloat)rowHeightForText:(NSString*)text;
 
 @end

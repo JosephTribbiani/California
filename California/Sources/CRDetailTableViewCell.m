@@ -24,13 +24,21 @@
 	[self.textView setFrame:CGRectMake(0, 371, 768, 46)];
 }
 
-+ (CGFloat)rowHeightForText:(NSString *)text
++ (CGFloat)rowHeightForText:(NSString*)text
 {
-	NSDictionary *attributes = @{NSFontAttributeName : [UIFont systemFontOfSize:16]};
-	
-	CGRect boundingRect = [text boundingRectWithSize:CGSizeMake(760, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)  attributes:attributes context:nil];
-	
-	return boundingRect.size.height + 370 + 20;
+	NSDictionary* attributes = @{NSFontAttributeName : [UIFont systemFontOfSize:16]};
+    
+    if (IS_IOS7_AND_UP)
+    {
+       CGRect boundingRect = [text boundingRectWithSize:CGSizeMake(760, CGFLOAT_MAX) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)  attributes:attributes context:nil];
+        return boundingRect.size.height + 370 + 20;
+    }
+    else
+    {
+       CGSize boundingSize = [text sizeWithFont:[UIFont systemFontOfSize:16.0f] constrainedToSize:CGSizeMake(760.0f, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
+        return boundingSize.height + 370 + 30;
+       
+    }
 }
 
 @end

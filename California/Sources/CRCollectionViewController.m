@@ -12,12 +12,12 @@
 
 @interface CRCollectionViewController()
 {
-	NSArray *_images;
+	NSArray* _images;
 }
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *selectLayoutButton;
-@property (nonatomic, retain, readonly) NSArray *images;
-@property (nonatomic, retain) UIPopoverController *selectLayoutPopover;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem* selectLayoutButton;
+@property (nonatomic, strong, readonly) NSArray* images;
+@property (nonatomic, strong) UIPopoverController* selectLayoutPopover;
 @property (nonatomic, assign) UICollectionViewScrollDirection scrollDirection;
 
 @end
@@ -39,12 +39,12 @@
 
 #pragma mark -
 
-- (NSArray *)images
+- (NSArray*)images
 {
 	if (_images == nil)
 	{
-		NSArray *urls = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"urls" ofType:@"plist"]];
-		NSMutableArray *mutableURLs = [NSMutableArray new];
+		NSArray* urls = [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"urls" ofType:@"plist"]];
+		NSMutableArray* mutableURLs = [NSMutableArray new];
 		for (NSUInteger i = 0; i < 20; i++)
 		{
 			[mutableURLs addObjectsFromArray:urls];
@@ -56,30 +56,30 @@
 
 #pragma mark - Collection View Datasource
 
--(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView*)collectionView
 {
 	return 1;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section
 {
 	return [self.images count];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell*)collectionView:(UICollectionView*)collectionView cellForItemAtIndexPath:(NSIndexPath*)indexPath
 {
-	CRCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionViewCell" forIndexPath:indexPath];
+	CRCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionViewCell" forIndexPath:indexPath];
 	[cell.imageView setImageWithURL:[NSURL URLWithString:self.images[indexPath.row]] placeholderImage:[UIImage imageNamed:@"Placeholder.jpg"]];
 	return cell;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
 {
 	
 	if ([[segue identifier]isEqualToString:@"SelectLayout"])
 	{
 		[self.selectLayoutButton setEnabled:NO];
-		CRSelectLayoutTableViewController *destinationViewController = [segue destinationViewController];
+		CRSelectLayoutTableViewController* destinationViewController = [segue destinationViewController];
 		destinationViewController.delegate = self;
 		self.selectLayoutPopover = [(UIStoryboardPopoverSegue*)segue popoverController];
         self.selectLayoutPopover.delegate = self;
@@ -106,7 +106,7 @@
 
 - (void)setHorizontalLayoutAnimated:(BOOL)animated
 {
-	UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
+	UICollectionViewFlowLayout* layout = [UICollectionViewFlowLayout new];
 	
 	if (UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation))
 	{
@@ -125,7 +125,7 @@
 
 - (void)setVerticalLayoutAnimated:(BOOL)animated
 {
-	UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
+	UICollectionViewFlowLayout* layout = [UICollectionViewFlowLayout new];
 	
 	if (UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation))
 	{
@@ -156,7 +156,7 @@
 
 #pragma mark - Popover Delegate
 
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+- (void)popoverControllerDidDismissPopover:(UIPopoverController*)popoverController
 {
     [self.selectLayoutButton setEnabled:YES];
 }
