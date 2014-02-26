@@ -29,7 +29,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <segue destination="RMx-3f-FxP" kind="relationship" relationship="masterViewController" id="BlO-5A-QYV"/>
-                        <segue destination="txf-f9-qK0" kind="relationship" relationship="detailViewController" id="wsi-tQ-zjJ"/>
+                        <segue destination="HL0-ay-gOR" kind="relationship" relationship="detailViewController" id="6rW-pf-UiW"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZU-Oi-B1e" sceneMemberID="firstResponder"/>
@@ -194,6 +194,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="actiomButton" destination="df8-ND-CtJ" id="UAd-1O-gFS"/>
                         <outlet property="mapView" destination="cu3-h4-jKl" id="HqH-RP-oU6"/>
                     </connections>
                 </viewController>
@@ -348,6 +349,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="dPM-eA-vvJ"/>
+        <segue reference="BGq-u8-lrg"/>
     </inferredMetricsTieBreakers>
 </document>

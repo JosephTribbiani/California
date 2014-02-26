@@ -19,7 +19,10 @@ NSString* const kAnnotationViewReuseIdentifier = @"AnnotationViewReuseIdentifier
 @property (strong, nonatomic) UIPopoverController* masterPopoverController;
 @property (nonatomic, strong) UILongPressGestureRecognizer* longPressGestureRecognizer;
 @property (nonatomic, strong) UITapGestureRecognizer* tapGestureRecognizer;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *actiomButton;
 @property (nonatomic, strong) NSMutableArray* annotations;
+@property (nonatomic, strong) id<MKAnnotation> selectedAnnotation;
+
 @end
 
 @implementation CRMapViewController
@@ -32,6 +35,8 @@ NSString* const kAnnotationViewReuseIdentifier = @"AnnotationViewReuseIdentifier
 	self.mapView.delegate = self;
     self.annotations = [NSMutableArray new];
     
+    [self.actiomButton setTitle:NSLocalizedString((IS_IOS7_AND_UP ? @"iOS7ActionButtonName" : @"iOS6ActionButtonName"), @"")];
+
 	[self configureGestureRecognizers];
 }
 
@@ -54,6 +59,11 @@ NSString* const kAnnotationViewReuseIdentifier = @"AnnotationViewReuseIdentifier
 }
 
 #pragma mark MapView Delegate
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
+{
+    self.selectedAnnotation = view.annotation;
+}
 
 - (MKAnnotationView*)mapView:(MKMapView*)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
@@ -107,18 +117,7 @@ NSString* const kAnnotationViewReuseIdentifier = @"AnnotationViewReuseIdentifier
         CGPoint location = [recognizer locationInView:self.mapView];
         CLLocationCoordinate2D coordinate = [self.mapView convertPoint:location toCoordinateFromView:self.mapView];
         CRAnnotation *annotation = [[CRAnnotation alloc] initWithLatitude:coordinate.latitude longitude:coordinate.longitude title:NSLocalizedString(@"LocationTitle", @"") subtitle:NSLocalizedString(@"LocationSubTitle", @"")];
-        if (IS_IOS7_AND_UP)
-        {
-            [self.annotations addObject:annotation];
-            [self updateAnnotations];
-        }
-        else
-        {
-            [self.mapView removeAnnotations:self.annotations];
-            [self.annotations addObject:annotation];
-            [self.mapView addAnnotations:self.annotations];
-        }
-        
+        [self updateAnnotationsWithObject:annotation];
     }
 }
 
@@ -201,49 +200,56 @@ NSString* const kAnnotationViewReuseIdentifier = @"AnnotationViewReuseIdentifier
 {
     [self.mapView removeOverlays:self.mapView.overlays];
     
-    id<MKAnnotation> annotation = [self.annotations lastObject];
+    id<MKAnnotation> annotation = self.selectedAnnotation;
     
-    MKPlacemark* sourcePlaceMark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(OCEAN_PLAZA_LATITUDE, OCEAN_PLAZA_LONGITUDE) addressDictionary:nil];
+    
+    MKPlacemark* sourcePlaceMark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(self.mapView.userLocation.location.coordinate.latitude, self.mapView.userLocation.location.coordinate.longitude) addressDictionary:nil];
     MKMapItem* sourceItem = [[MKMapItem alloc] initWithPlacemark:sourcePlaceMark];
     
     MKPlacemark* destinationPlaceMark = [[MKPlacemark alloc] initWithCoordinate:annotation.coordinate addressDictionary:nil];
     MKMapItem* destinationItem = [[MKMapItem alloc] initWithPlacemark:destinationPlaceMark];
     
-    MKDirectionsRequest* request = [[MKDirectionsRequest alloc] init];
-    [request setSource:sourceItem];
-    [request setDestination:destinationItem];
-
     if (IS_IOS7_AND_UP)
     {
+        MKDirectionsRequest* request = [[MKDirectionsRequest alloc] init];
+        [request setSource:sourceItem];
+        [request setDestination:destinationItem];
         [request setTransportType:MKDirectionsTransportTypeAutomobile];
         [request setRequestsAlternateRoutes:YES];
-    }
 
-    MKDirections* directions = [[MKDirections alloc] initWithRequest:request];
-    
-    [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error)
+        MKDirections* directions = [[MKDirections alloc] initWithRequest:request];
+        
+        [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error)
+        {
+            if (error)
+            {
+                return ;
+            }
+            for (MKRoute* route in [[response routes] reverseObjectEnumerator])
+            {
+                CRPolyLine* overlay =  [[CRPolyLine alloc] initWithMKPolyLine:[route polyline]];
+                overlay.routeType = ([[response routes] firstObject] == route ? CRRouteTypePrimary : CRRouteTypeSecondary);
+                overlay.expectedTravelTime = [route expectedTravelTime];
+                [self.mapView addOverlay:overlay level:MKOverlayLevelAboveRoads];
+            }
+        
+        }];
+    }
+    else
     {
-        if (error)
-        {
-            return ;
-        }
-        for (MKRoute* route in [[response routes] reverseObjectEnumerator])
-        {
-            CRPolyLine* overlay =  [[CRPolyLine alloc] initWithMKPolyLine:[route polyline]];
-            overlay.routeType = ([[response routes] firstObject] == route ? CRRouteTypePrimary : CRRouteTypeSecondary);
-            overlay.expectedTravelTime = [route expectedTravelTime];
-            [self.mapView addOverlay:overlay level:MKOverlayLevelAboveRoads];
-        }
-//      [MKMapItem openMapsWithItems:@[response.source, response.destination] launchOptions:@{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving}];
-    }];
+        [MKMapItem openMapsWithItems:@[sourceItem, destinationItem] launchOptions:@{MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving}];
+    }
 }
 
 #pragma mark -
 
-- (void)updateAnnotations
+- (void)updateAnnotationsWithObject:(id<MKAnnotation>)annotation
 {
-	[self.mapView removeAnnotations:self.mapView.annotations];
-	[self.mapView addAnnotations:self.annotations];
+	[self.mapView removeAnnotations:self.annotations];
+    [self.annotations addObject:annotation];
+    [self.mapView addAnnotations:self.annotations];
+    self.selectedAnnotation = annotation;
+    
     if (IS_IOS7_AND_UP)
     {
        [self.mapView showAnnotations:self.mapView.annotations animated:YES];
