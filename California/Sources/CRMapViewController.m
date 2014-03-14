@@ -9,6 +9,7 @@
 #import "CRMapViewController.h"
 #import "CRAnnotation.h"
 #import "CRPolyLine.h"
+#import "CRRoutedDetailsViewController.h"
 
 #define OCEAN_PLAZA_LATITUDE 50.412316
 #define OCEAN_PLAZA_LONGITUDE 30.522562
@@ -22,6 +23,7 @@ NSString* const kAnnotationViewReuseIdentifier = @"AnnotationViewReuseIdentifier
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *actiomButton;
 @property (nonatomic, strong) NSMutableArray* annotations;
 @property (nonatomic, strong) id<MKAnnotation> selectedAnnotation;
+@property (nonatomic, strong) UIPopoverController *routeDetailsPopover;
 
 @end
 
@@ -134,11 +136,13 @@ NSString* const kAnnotationViewReuseIdentifier = @"AnnotationViewReuseIdentifier
             MKPolylineRenderer* renderer = (MKPolylineRenderer *)[self mapView:self.mapView rendererForOverlay:overlay];
             CGPoint tapPoint = [renderer pointForMapPoint:tapMapPoint];
             CGPathRef pathRef = [renderer path];
-            CGPathRef strokedPath = CGPathCreateCopyByStrokingPath(pathRef, NULL, 300, kCGLineCapRound, kCGLineJoinRound, 1);
+#warning QUESTION
+            CGPathRef strokedPath = CGPathCreateCopyByStrokingPath(pathRef, NULL, 400, kCGLineCapRound, kCGLineJoinRound, 1);
             BOOL isRouteSelected = (CGPathContainsPoint(strokedPath, NULL, tapPoint, NO));
             CGPathRelease(strokedPath);
             if (isRouteSelected)
             {
+                [self showRouteDetails:overlay];
                 ((CRPolyLine*)overlay).routeType = CRRouteTypePrimary;
                 [self assignPrimaryRoute:overlay];
                 break;
@@ -201,7 +205,6 @@ NSString* const kAnnotationViewReuseIdentifier = @"AnnotationViewReuseIdentifier
     [self.mapView removeOverlays:self.mapView.overlays];
     
     id<MKAnnotation> annotation = self.selectedAnnotation;
-    
     
     MKPlacemark* sourcePlaceMark = [[MKPlacemark alloc] initWithCoordinate:CLLocationCoordinate2DMake(self.mapView.userLocation.location.coordinate.latitude, self.mapView.userLocation.location.coordinate.longitude) addressDictionary:nil];
     MKMapItem* sourceItem = [[MKMapItem alloc] initWithPlacemark:sourcePlaceMark];
@@ -279,5 +282,20 @@ NSString* const kAnnotationViewReuseIdentifier = @"AnnotationViewReuseIdentifier
     return [NSString stringWithFormat:@"%02i:%02i:%02i", hours, minutes, seconds];
 }
 
+#pragma mark - 
+
+- (void)showRouteDetails:(CRPolyLine*)overlay
+{
+    MKMapPoint mapPoint = overlay.points[overlay.pointCount/2];
+    CGPoint point = [self.mapView convertCoordinate:MKCoordinateForMapPoint(mapPoint) toPointToView:self.mapView];
+    CRRoutedDetailsViewController *routeDetailsViewController = [[UIStoryboard storyboardWithName:@"Main_iPad" bundle:nil] instantiateViewControllerWithIdentifier:@"RouteDetails"];
+    
+    routeDetailsViewController.expectedTime = [self stringFromTimeInterval:overlay.expectedTravelTime];
+    
+    UIPopoverController *detailsPopover = [[UIPopoverController alloc] initWithContentViewController:routeDetailsViewController];
+    self.routeDetailsPopover = detailsPopover;
+    [self.routeDetailsPopover presentPopoverFromRect:CGRectMake(point.x, point.y, 10, 10) inView:self.mapView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    
+}
 
 @end

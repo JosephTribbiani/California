@@ -53,6 +53,7 @@
 		D82A00D418BB738800E88ECA /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = D82A00D318BB738800E88ECA /* pin.png */; };
 		D82A00D818BB748000E88ECA /* pin2.png in Resources */ = {isa = PBXBuildFile; fileRef = D82A00D718BB748000E88ECA /* pin2.png */; };
 		D82A00DA18BB997700E88ECA /* Cogniance.gpx in Resources */ = {isa = PBXBuildFile; fileRef = D82A00D918BB997700E88ECA /* Cogniance.gpx */; };
+		D8828F3618BDFCA7009D0713 /* CRRoutedDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8828F3518BDFCA7009D0713 /* CRRoutedDetailsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +145,8 @@
 		D82A00D318BB738800E88ECA /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
 		D82A00D718BB748000E88ECA /* pin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin2.png; sourceTree = "<group>"; };
 		D82A00D918BB997700E88ECA /* Cogniance.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Cogniance.gpx; sourceTree = "<group>"; };
+		D8828F3418BDFCA7009D0713 /* CRRoutedDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRRoutedDetailsViewController.h; sourceTree = "<group>"; };
+		D8828F3518BDFCA7009D0713 /* CRRoutedDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRRoutedDetailsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +295,8 @@
 				D82A00D018BB4E5A00E88ECA /* CRUpdateUI.h */,
 				7825A95B18B88E770078E937 /* CRMapViewController.h */,
 				7825A95C18B88E770078E937 /* CRMapViewController.m */,
+				D8828F3418BDFCA7009D0713 /* CRRoutedDetailsViewController.h */,
+				D8828F3518BDFCA7009D0713 /* CRRoutedDetailsViewController.m */,
 			);
 			name = Controllers;
 			path = Sources;
@@ -475,6 +480,7 @@
 				7825A99B18B8E2F20078E937 /* UIProgressView+AFNetworking.m in Sources */,
 				7824E3CE18B76E2000CA679E /* CRTableViewController.m in Sources */,
 				7825A99818B8E2F20078E937 /* UIAlertView+AFNetworking.m in Sources */,
+				D8828F3618BDFCA7009D0713 /* CRRoutedDetailsViewController.m in Sources */,
 				7824E3CB18B76E0100CA679E /* CRCollectionViewController.m in Sources */,
 				7825A99418B8E2F20078E937 /* AFURLResponseSerialization.m in Sources */,
 				7825A99918B8E2F20078E937 /* UIButton+AFNetworking.m in Sources */,
